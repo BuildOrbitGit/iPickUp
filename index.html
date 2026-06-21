@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>iPickUp — Deliveries, Towing & Junk Removal · Greater Vancouver</title>
+<title>iPickUp · Deliveries, Towing & Junk Removal · Greater Vancouver</title>
 <meta name="description" content="iPickUp by Kareem Khan. Deliveries, towing, junk removal, dump-runs, furniture assembly and construction hauling across Greater Vancouver and Fraser Valley. Free quotes. 604-366-0337."/>
-<meta property="og:title" content="iPickUp — Deliveries, Towing & Junk Removal"/>
+<meta property="og:title" content="iPickUp · Deliveries, Towing & Junk Removal"/>
 <meta property="og:description" content="One truck. Every job. Free quotes across Greater Vancouver and the Fraser Valley."/>
 <meta property="og:image" content="assets/gallery/work-grill-delivery.jpg"/>
 <meta property="og:type" content="website"/>
@@ -52,103 +52,210 @@ a{color:inherit;text-decoration:none}
 .rev.in{opacity:1;transform:none}
 
 /* ---------- NAV ---------- */
-header{position:sticky;top:0;z-index:200;transition:.25s}
-header.stuck{background:rgba(3,15,10,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+header{
+  position:sticky;top:0;z-index:200;
+  transition:background .35s,border-color .35s,backdrop-filter .35s;
+  background:transparent;border-bottom:none;
+  padding-top:env(safe-area-inset-top,0);
+}
+header:not(.stuck){background:transparent}
+header.stuck{
+  background:rgba(3,15,10,.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
 .nav{display:flex;align-items:center;justify-content:space-between;height:92px;gap:12px}
-.brand{display:flex;align-items:center;gap:6px;line-height:1}
-.brand img{height:84px;width:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,.6));display:block}
-.brand-name{font-family:"Big Shoulders Display",sans-serif;font-weight:900;font-size:2rem;letter-spacing:.04em;line-height:1;background:var(--G);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;margin-top:6px}
+.brand{display:inline-flex;align-items:center;gap:2px;line-height:1;flex-shrink:0}
+.brand img{height:76px;width:auto;display:block;flex-shrink:0;filter:drop-shadow(0 2px 10px rgba(0,0,0,.6))}
+.brand-name{
+  font-family:"Big Shoulders Display",sans-serif;font-weight:900;
+  font-size:clamp(1.65rem,2.4vw,1.95rem);letter-spacing:.05em;line-height:1;
+  margin:0;padding:0;transform:translateY(4px);
+  background:var(--G);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 1px 10px rgba(0,0,0,.55));
+  white-space:nowrap;
+}
 .nav-links{display:flex;gap:30px}
 .nav-links a{font-weight:600;font-size:.9rem;color:var(--muted);transition:.2s;position:relative}
-.nav-links a:hover{color:var(--cream)}
+header:not(.stuck) .nav-links a{
+  color:rgba(242,235,224,.94);
+  text-shadow:0 1px 10px rgba(0,0,0,.85),0 0 1px rgba(0,0,0,.8);
+}
+header:not(.stuck) .nav-links a:hover{color:#fff}
+header.stuck .nav-links a{color:var(--muted)}
+header.stuck .nav-links a:hover{color:var(--cream)}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:2px;width:0;background:var(--G);transition:.22s}
 .nav-links a:hover::after{width:100%}
 .nav-end{display:flex;align-items:center;gap:10px}
+header:not(.stuck) .btn-ghost{
+  color:var(--cream);border-color:rgba(242,235,224,.42);
+  background:rgba(3,15,10,.42);
+  text-shadow:0 1px 8px rgba(0,0,0,.65);
+  backdrop-filter:blur(6px);
+}
+header:not(.stuck) .btn-gold{box-shadow:0 4px 22px rgba(0,0,0,.45)}
 .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:9px;cursor:pointer}
 .menu-btn span{display:block;width:21px;height:2px;background:var(--gold);margin:4px 0}
 
 /* ---------- HERO ---------- */
 .hero{
-  position:relative;min-height:92vh;overflow:hidden;
-  background:var(--bg1);
-  display:flex;align-items:center;
+  position:relative;min-height:100vh;min-height:100svh;overflow:hidden;
+  background:#030f0a;
+  display:flex;align-items:center;justify-content:flex-start;
+  padding:calc(92px + env(safe-area-inset-top,0px) + 48px) 0 0;
+  margin-top:calc(-92px - env(safe-area-inset-top,0px));
 }
-/* atmospheric lighting: deeper on left for text, subtle emerald glow right */
-.hero-bg{
+.hero-media{
+  position:absolute;left:0;right:0;bottom:0;
+  top:calc(-92px - env(safe-area-inset-top,0px));
+  z-index:0;overflow:hidden;
+}
+.hero-photo-wrap{
+  position:absolute;inset:-3%;
+  width:106%;height:106%;
+}
+.hero-photo{
+  width:100%;height:100%;object-fit:cover;
+  object-position:48% 44%;
+  display:block;
+  transform:scale(0.975) translateZ(0);
+  animation:heroKen 50s cubic-bezier(.45,.05,.55,.95) infinite;
+  backface-visibility:hidden;
+}
+@keyframes heroKen{
+  0%,100%{transform:scale(0.975) translate3d(0.6%,0,0)}
+  50%{transform:scale(1.015) translate3d(0.15%,-0.35%,0)}
+}
+.hero-media::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:72px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,transparent 0%,rgba(3,15,10,.2) 40%,rgba(3,15,10,.88) 100%);
+}
+.hero-overlay{
   position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 55% 90% at 72% 60%, rgba(12,38,25,.7), transparent 70%),
-    radial-gradient(ellipse 35% 50% at 50% 100%, rgba(201,162,39,.05), transparent 60%),
-    linear-gradient(105deg, var(--bg) 0%, var(--bg1) 45%, rgba(10,30,20,.8) 100%);
+    linear-gradient(90deg,
+      rgba(3,15,10,.74) 0%,
+      rgba(3,15,10,.4) 30%,
+      rgba(3,15,10,.06) 52%,
+      transparent 100%
+    ),
+    linear-gradient(180deg,
+      rgba(3,15,10,.82) 0,
+      rgba(3,15,10,.58) 72px,
+      rgba(3,15,10,.32) 130px,
+      rgba(3,15,10,.1) 190px,
+      transparent 280px,
+      rgba(3,15,10,.1) 78%,
+      rgba(3,15,10,.55) 94%,
+      rgba(3,15,10,.92) 100%
+    );
 }
-/* left-to-right vignette so text always reads against dark */
-.hero-vignette{
-  position:absolute;inset:0;pointer-events:none;z-index:2;
-  background:linear-gradient(90deg,
-    rgba(3,15,10,.96) 0%,
-    rgba(3,15,10,.8) 26%,
-    rgba(3,15,10,.35) 50%,
-    transparent 70%
-  );
+.hero-btns .btn{min-height:48px}
+.hero-shell{
+  position:relative;z-index:2;width:100%;
+  margin:0;padding:0 clamp(12px,2vw,28px) 80px;
+  display:flex;align-items:center;justify-content:flex-start;
 }
-.hero-text{
-  position:relative;z-index:3;
-  max-width:var(--max);width:100%;margin:0 auto;padding:100px 24px 80px;
+.hero-content{
+  text-align:left;width:min(100%,420px);margin:0;
+  padding:0;
+  text-shadow:0 2px 28px rgba(0,0,0,.55);
 }
-.hero-text-inner{max-width:520px}
-.badge{
-  display:inline-flex;align-items:center;gap:9px;
-  border:1px solid var(--line);background:rgba(201,162,39,.07);
-  padding:7px 16px;border-radius:999px;
-  font-size:.75rem;font-weight:600;color:var(--gold2);margin-bottom:28px;
+.hero-eyebrow{
+  display:block;font-family:"Spline Sans Mono",monospace;
+  font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
 }
-.badge .loc{width:12px;height:12px;flex-shrink:0;opacity:.9}
-.hero h1{font-size:clamp(3.2rem,6vw,6rem)}
-.hero h1 .line2{display:block}
-.hero p{font-size:1.12rem;color:var(--muted);line-height:1.68;max-width:28em;margin:22px 0 30px}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.hero-divider{width:52px;height:3px;background:var(--G);border-radius:2px;margin:30px 0}
-.hero-stats{display:flex;gap:26px;flex-wrap:wrap}
-.hero-stats .s b{font-family:"Big Shoulders Display";font-size:2rem;font-weight:900;display:block;line-height:1;color:var(--gold2)}
-.hero-stats .s span{font-size:.78rem;color:var(--muted);margin-top:3px;display:block}
+.hero-loc{
+  font-size:.92rem;font-weight:600;color:rgba(242,235,224,.75);
+  margin-bottom:28px;display:flex;align-items:center;gap:8px;
+}
+.hero-loc svg{width:14px;height:14px;flex-shrink:0}
+.hero h1{
+  margin:0;line-height:.95;letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.hero-h1-md{
+  display:block;font-size:clamp(1.5rem,2.8vw,2.1rem);
+  font-weight:700;color:rgba(242,235,224,.88);margin-bottom:6px;
+  text-transform:none;font-family:"Hanken Grotesk",sans-serif;
+  letter-spacing:.01em;
+}
+.hero-h1-xl{
+  display:block;font-size:clamp(3.2rem,7.5vw,5.8rem);
+  font-weight:900;text-transform:uppercase;
+}
+.hero-desc{
+  font-size:clamp(1rem,1.4vw,1.12rem);color:rgba(242,235,224,.82);
+  line-height:1.65;max-width:28em;margin:28px 0 32px;
+  text-wrap:balance;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start}
+.hero-meta{
+  display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;
+  padding-top:0;border-top:none;
+}
+.hero-meta .s b{
+  font-family:"Big Shoulders Display";font-size:1.5rem;font-weight:900;
+  display:block;line-height:1;color:var(--gold2);
+}
+.hero-meta .s span{font-size:.76rem;color:rgba(242,235,224,.6);margin-top:4px;display:block}
 
-/* truck — absolutely positioned, mirrored so front faces the text/left */
-.hero-truck-img{
-  position:absolute;
-  right:0;bottom:0;
-  width:60%;max-width:840px;
-  z-index:1;pointer-events:none;
-  transform:scaleX(-1);
-  filter:
-    brightness(.84) saturate(.9)
-    drop-shadow(60px 0 90px rgba(3,15,10,1))
-    drop-shadow(30px 0 50px rgba(3,15,10,.95))
-    drop-shadow(0 50px 70px rgba(0,0,0,.8));
+@media(max-width:1023px){
+  .hero-photo{
+    object-position:50% 40%;
+    animation:heroKenTab 55s cubic-bezier(.45,.05,.55,.95) infinite;
+  }
+  @keyframes heroKenTab{
+    0%,100%{transform:scale(0.98) translate3d(0,0,0)}
+    50%{transform:scale(1.008) translate3d(0,-0.2%,0)}
+  }
+  .hero{
+    padding:calc(96px + env(safe-area-inset-top,0px) + 28px) 0 0;
+    min-height:100svh;justify-content:center;
+  }
+  .hero-media{top:calc(-96px - env(safe-area-inset-top,0px))}
+  .hero-shell{justify-content:center;padding:0 max(16px,env(safe-area-inset-right)) max(48px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+  .hero-content{
+    text-align:center;width:min(100%,540px);margin:0 auto;
+    padding:0;
+  }
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-btns,.hero-meta{justify-content:center}
+  .hero-btns{width:100%;max-width:380px;margin:0 auto}
+  .hero-btns .btn{flex:1 1 45%;justify-content:center;padding:14px 18px}
+  .hero-loc{justify-content:center}
+  .hero-meta{gap:12px 16px}
+  .hero-meta .s{flex:1 1 28%;min-width:90px;text-align:center}
+  .hero-overlay{
+    background:
+      linear-gradient(180deg,
+        rgba(3,15,10,.78) 0,
+        rgba(3,15,10,.5) 80px,
+        rgba(3,15,10,.2) 150px,
+        transparent 240px,
+        rgba(3,15,10,.25) 82%,
+        rgba(3,15,10,.6) 100%
+      );
+  }
 }
-/* subtle right-edge fade — just the last 10%, not eating into the truck */
-.hero-truck-vignette{
-  position:absolute;top:0;right:0;bottom:0;
-  width:10%;z-index:3;pointer-events:none;
-  background:linear-gradient(270deg,var(--bg1) 0%,transparent 100%);
-}
-.truck-ground{
-  position:absolute;right:3%;bottom:1%;
-  width:52%;height:38px;
-  background:radial-gradient(closest-side,rgba(201,162,39,.14),transparent);
-  filter:blur(14px);border-radius:50%;z-index:2;pointer-events:none;
-  transform:scaleX(-1);
+@media(prefers-reduced-motion:reduce){
+  .hero-photo{animation:none!important;transform:scale(0.975)!important}
+  .hero-media{transform:none!important}
 }
 
 /* ---------- TICKER ---------- */
 .ticker{
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  position:relative;z-index:3;
+  border-top:none;border-bottom:1px solid var(--line);
   overflow:hidden;white-space:nowrap;padding:14px 0;
-  background:var(--bg);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  background:var(--bg);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
 }
 .ticker-track{display:inline-flex;gap:52px;animation:tick 28s linear infinite}
 .ticker-track span{font-family:"Big Shoulders Display";font-size:1.1rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(242,235,224,.72)}
 .ticker-track span strong{color:var(--gold)}
 @keyframes tick{to{transform:translateX(-50%)}}
 
@@ -222,8 +329,9 @@ form{background:linear-gradient(148deg,rgba(15,47,32,.35),rgba(3,15,10,.5));bord
 form .btn-gold{width:100%;justify-content:center;margin-top:4px;padding:15px}
 
 /* ---------- FOOTER ---------- */
-footer .brand-name{font-size:1.8rem}
-footer .brand img{height:68px}
+footer .brand-name{font-size:1.65rem;transform:translateY(3px)}
+footer .brand img{height:64px}
+footer .brand{gap:2px}
 footer{padding:44px 0 28px;border-top:1px solid var(--line)}
 .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
 .foot-links{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
@@ -351,6 +459,7 @@ form.is-sent .form-success.show{display:block}
   .ticker-track{animation:none}
   .rev{opacity:1;transform:none;transition:none}
   .work-main img,.work-side img{transition:none}
+  .hero-photo{animation:none!important;transform:scale(0.97)!important}
 }
 
 /* ---------- RESPONSIVE ---------- */
@@ -369,17 +478,13 @@ form.is-sent .form-success.show{display:block}
   .nav-links{display:none}
   .menu-btn{display:block}
   .nav-end .btn-ghost{display:none} /* hide phone btn — too crowded on tablet/mobile */
-  .brand-name{font-size:1.85rem}
-  .brand img{height:80px}
+  .brand-name{font-size:1.75rem;transform:translateY(3px)}
+  .brand img{height:72px}
+  .brand{gap:2px}
   .nav{height:96px}
 
   /* hero */
-  .hero{min-height:auto}
-  .hero-text{padding:60px 24px 320px}
-  .hero-text-inner{max-width:100%}
-  .hero-truck-img{width:88%;right:0}
-  .truck-ground{width:82%;right:0}
-  .hero-vignette{background:linear-gradient(90deg,rgba(3,15,10,.98) 0%,rgba(3,15,10,.9) 30%,rgba(3,15,10,.55) 55%,transparent 80%)}
+  .hero-h1-xl{font-size:clamp(2.6rem,8vw,4rem)}
 
   /* sections */
   .section{padding:64px 0}
@@ -411,19 +516,14 @@ form.is-sent .form-success.show{display:block}
   /* disable scroll-reveal on mobile — content must be immediately visible */
   .rev{opacity:1;transform:none;transition:none}
 
-  .brand-name{font-size:1.75rem}
-  .brand img{height:74px}
-  /* truck: full-width at bottom of hero, text padded above it */
-  .hero-truck-img{width:100%;right:0;opacity:.88;filter:brightness(.8) saturate(.85) drop-shadow(60px 0 80px rgba(3,15,10,1)) drop-shadow(0 40px 60px rgba(0,0,0,.9))}
-  .truck-ground{width:90%;right:0}
-  .hero-truck-vignette{width:8%}
-  .hero-vignette{background:linear-gradient(to right,rgba(3,15,10,.99) 0%,rgba(3,15,10,.9) 40%,rgba(3,15,10,.55) 65%,transparent 90%)}
-  .hero-text{padding:52px 20px 230px}
-  .hero-text-inner{max-width:100%}
-  .hero h1{font-size:clamp(2.8rem,9vw,4rem)}
-  .svc-grid{grid-template-columns:1fr}
-  .strip-grid{grid-template-columns:1fr 1fr}
-  .hero-stats{gap:16px}
+  .brand-name{font-size:1.65rem;transform:translateY(3px)}
+  .brand img{height:68px}
+  .hero-content{padding:0}
+  .hero-h1-xl{font-size:clamp(2.4rem,9vw,3.4rem)}
+  .hero-meta{gap:12px;justify-content:center}
+  .hero-btns{flex-direction:column;max-width:100%}
+  .hero-btns .btn{width:100%;flex:none}
+  .hero-desc{font-size:1rem;margin:22px 0 26px}
   .ph-link{font-size:1.7rem}
   .contact-card{padding:20px}
   form{padding:18px}
@@ -433,13 +533,11 @@ form.is-sent .form-success.show{display:block}
 }
 
 @media(max-width:400px){
-  .brand img{height:66px}
-  .brand-name{font-size:1.55rem}
+  .brand img{height:60px}
+  .brand-name{font-size:1.45rem;transform:translateY(2px)}
   .nav-end .btn-gold{font-size:.8rem;padding:10px 14px}
-  .hero-text{padding:40px 16px 56px}
-  .hero h1{font-size:clamp(2.4rem,10vw,3.2rem)}
-  .btn{font-size:.85rem;padding:11px 18px}
-  .hero-stats .s b{font-size:1.6rem}
+  .hero-h1-xl{font-size:clamp(2.2rem,10vw,3rem)}
+  .hero-meta .s b{font-size:1.4rem}
 }
 </style>
 </head>
@@ -471,20 +569,24 @@ form.is-sent .form-success.show{display:block}
 
 <!-- HERO -->
 <section class="hero" id="hero" aria-label="Introduction">
-  <div class="hero-bg"></div>
-  <div class="hero-vignette"></div>
-  <!-- truck: direct child of hero, absolutely positioned, no wrapper box -->
-  <img class="hero-truck-img" src="assets/car.png" alt="iPickUp Ford F-350 pickup truck"/>
-  <div class="truck-ground"></div>
-  <div class="hero-truck-vignette"></div>
-  <div class="hero-text">
-    <div class="hero-text-inner rev">
-      <div class="badge"><svg class="loc" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#c9a227"/></svg> Greater Vancouver &amp; Fraser Valley</div>
+  <div class="hero-media" id="heroMedia" aria-hidden="true">
+    <div class="hero-photo-wrap">
+      <img class="hero-photo" src="assets/hero-family.jpg" alt="" loading="eager" fetchpriority="high"/>
+    </div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-shell">
+    <div class="hero-content rev">
+      <span class="hero-eyebrow">Available now</span>
+      <p class="hero-loc">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#c9a227"/></svg>
+        Greater Vancouver &amp; Fraser Valley
+      </p>
       <h1>
-        Need it<br>
-        <span class="line2 gold-txt">picked up?</span>
+        <span class="hero-h1-md">Get it picked up faster</span>
+        <span class="hero-h1-xl">with <span class="gold-txt">iPickUp.</span></span>
       </h1>
-      <p>Deliveries, towing, junk removal, furniture assembly and construction hauling. One call, one truck, done right.</p>
+      <p class="hero-desc">Deliveries, towing, junk removal and haul-outs. One truck, one call, anywhere in the Lower Mainland.</p>
       <div class="hero-btns">
         <a href="#contact" class="btn btn-gold">Get a Free Quote
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -494,11 +596,10 @@ form.is-sent .form-success.show{display:block}
           Call Kareem
         </a>
       </div>
-      <div class="hero-divider"></div>
-      <div class="hero-stats">
+      <div class="hero-meta">
         <div class="s"><b>Free</b><span>Quotes, always</span></div>
-        <div class="s"><b>Same-Day</b><span>Bookings available</span></div>
-        <div class="s"><b>6+</b><span>Services on offer</span></div>
+        <div class="s"><b>Same-Day</b><span>When you need it</span></div>
+        <div class="s"><b>Local</b><span>Owner on every job</span></div>
       </div>
     </div>
   </div>
@@ -530,7 +631,7 @@ form.is-sent .form-success.show{display:block}
     <div class="sec-hd rev">
       <span class="kicker">What we do</span>
       <h2 id="services-hd">One truck. <span class="gold-txt">Every job.</span></h2>
-      <p>From a single couch across town to a full site cleanout, iPickUp handles the heavy lifting so you don't have to.</p>
+      <p>From a couch across town to a full site cleanout, we load it, haul it and drop it off.</p>
     </div>
     <div class="svc-grid">
       <article class="card rev">
@@ -597,7 +698,7 @@ form.is-sent .form-success.show{display:block}
     <div class="sec-hd rev">
       <span class="kicker">From the truck camera</span>
       <h2 id="work-hd">Recent jobs <span class="gold-txt">on the road.</span></h2>
-      <p>Kareem is out hauling every day across Greater Vancouver and the Fraser Valley. Here are a few recent runs — more getting snapped and added as they roll in.</p>
+      <p>Kareem is out hauling every day across Greater Vancouver and the Fraser Valley. Here are a few recent jobs. More photos going up when he gets them.</p>
     </div>
 
     <div class="work-layout rev">
@@ -617,7 +718,7 @@ form.is-sent .form-success.show{display:block}
           <figcaption class="work-cap">
             <span class="tag">Delivery</span>
             <h3>BBQ grill transport</h3>
-            <p>Oversized grill loaded, strapped and delivered — no trailer needed.</p>
+            <p>Oversized grill loaded, strapped and delivered. No trailer needed.</p>
           </figcaption>
         </figure>
         <figure class="work-side-item work-photo" tabindex="0" role="button" aria-label="View full photo: Multi-item haul-out"
@@ -626,7 +727,7 @@ form.is-sent .form-success.show{display:block}
           <figcaption class="work-cap">
             <span class="tag">Junk removal &amp; haul</span>
             <h3>Patio cleanout haul</h3>
-            <p>Grill, chairs, lumber and debris — loaded and gone in one trip.</p>
+            <p>Grill, chairs, lumber and debris. Loaded and gone in one trip.</p>
           </figcaption>
         </figure>
       </div>
@@ -635,7 +736,7 @@ form.is-sent .form-success.show{display:block}
     <div class="work-breadth rev">
       <div class="work-breadth-text">
         <h3>Every week, something different.</h3>
-        <p>These three are just what's on camera lately. Deliveries, towing, dump-runs, furniture assembly and site hauling — if it fits in the truck, Kareem's probably done it this month.</p>
+        <p>These three are just what's on camera lately. Deliveries, towing, dump-runs, furniture assembly and site hauling. If it fits in the truck, Kareem has likely done it this month.</p>
       </div>
       <div class="work-types" aria-label="Types of jobs handled">
         <span class="work-type">Deliveries</span>
@@ -657,7 +758,7 @@ form.is-sent .form-success.show{display:block}
     <div class="sec-hd rev" style="text-align:center;max-width:640px;margin:0 auto 0">
       <span class="kicker">Simple process</span>
       <h2 id="process-hd">Three steps. <span class="gold-txt">Job done.</span></h2>
-      <p style="margin-left:auto;margin-right:auto">No apps, no hassle. Call or fill out the form and Kareem handles the rest.</p>
+      <p style="margin-left:auto;margin-right:auto">Call or fill out the form. Kareem handles the rest.</p>
     </div>
     <div class="steps-grid">
       <div class="step rev">
@@ -668,7 +769,7 @@ form.is-sent .form-success.show{display:block}
       <div class="step rev">
         <div class="step-num">2</div>
         <h3>Get a free quote</h3>
-        <p>Transparent pricing upfront. Same-day and next-day slots available across the Lower Mainland.</p>
+        <p>Clear pricing upfront. Same-day and next-day slots across the Lower Mainland.</p>
       </div>
       <div class="step rev">
         <div class="step-num">3</div>
@@ -767,7 +868,7 @@ form.is-sent .form-success.show{display:block}
             <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
           </div>
           <h3>Quote request sent</h3>
-          <p>Kareem has your details and will call or text you back shortly — usually within a few hours.</p>
+          <p>Kareem has your details and will call or text you back shortly, usually within a few hours.</p>
           <a href="tel:6043660337" class="btn btn-gold">Call 604-366-0337</a>
           <div style="margin-top:12px"><button type="button" class="btn btn-ghost" id="formReset">Send another request</button></div>
         </div>
@@ -830,6 +931,29 @@ document.addEventListener('keydown',e=>{
 
 document.getElementById('yr').textContent=new Date().getFullYear();
 
+/* hero photo — smooth Ken Burns + light desktop parallax */
+const heroMedia=document.getElementById('heroMedia');
+const heroParallax=window.matchMedia('(prefers-reduced-motion: reduce)');
+const heroDesktop=window.matchMedia('(min-width:1280px)');
+function syncHeroParallax(){
+  if(!heroMedia||heroParallax.matches||!heroDesktop.matches)return;
+  const y=Math.min(window.scrollY,window.innerHeight);
+  heroMedia.style.transform=`translate3d(0,${(y*0.12).toFixed(2)}px,0)`;
+}
+function bindHeroParallax(){
+  if(!heroMedia||heroParallax.matches||!heroDesktop.matches){
+    if(heroMedia)heroMedia.style.transform='';
+    return;
+  }
+  syncHeroParallax();
+}
+if(heroMedia){
+  window.addEventListener('scroll',syncHeroParallax,{passive:true});
+  heroParallax.addEventListener('change',bindHeroParallax);
+  heroDesktop.addEventListener('change',bindHeroParallax);
+  bindHeroParallax();
+}
+
 /* scroll reveal */
 const revEls=document.querySelectorAll('.rev');
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -863,8 +987,8 @@ document.querySelectorAll('.work-photo').forEach(el=>{
   el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
 });
 
-/* quote form — FormSubmit (no signup; swap email when going live for client) */
-const FORM_EMAIL='buildorbitstudio@gmail.com';
+/* quote form — FormSubmit */
+const FORM_EMAIL='kareemkhan15@gmail.com';
 const ALLOWED_SERVICES=['Deliveries','Towing','Junk Removal / Dump-Runs','Furniture Assembly','Construction Hauling','Something else'];
 const NAME_RE=/^[a-zA-Z\s'-]+$/;
 const MAX_MSG=2000;
@@ -962,10 +1086,10 @@ form.addEventListener('submit',async e=>{
       method:'POST',
       headers:{'Content-Type':'application/json',Accept:'application/json'},
       body:JSON.stringify({
-        _subject:'iPickUp — A client sent a new quote request',
+        _subject:'iPickUp · New quote request from a client',
         _template:'table',
         _captcha:'false',
-        'Request type':'Client quote request (iPickUp website)',
+        'Request type':'New quote inquiry via iPickUp website',
         'Client name':name,
         'Phone':phone,
         'Service requested':service,
@@ -979,7 +1103,7 @@ form.addEventListener('submit',async e=>{
     formSuccess.classList.add('show');
     form.reset();
   }catch{
-    showFormError('Could not send right now — please call Kareem at 604-366-0337.');
+    showFormError('Could not send right now. Please call Kareem at 604-366-0337.');
   }finally{
     submitBtn.classList.remove('is-loading');
     submitBtn.disabled=false;
