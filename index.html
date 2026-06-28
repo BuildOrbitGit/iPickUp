@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
   --bg:    #030f0a;
@@ -35,12 +35,13 @@ body{
   font-family:"Hanken Grotesk",sans-serif;
   background:var(--bg);color:var(--cream);
   overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  line-height:1.7;font-optical-sizing:auto;
 }
 body::after{content:"";position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.032;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:"Big Shoulders Display",sans-serif;font-weight:900;text-transform:uppercase;line-height:.93;letter-spacing:.01em}
-.kicker{font-family:"Spline Sans Mono",monospace;font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:"Big Shoulders Display",sans-serif;font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:.04em;text-wrap:balance}
+.kicker{font-family:"Spline Sans Mono",monospace;font-size:.75rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
 .gold-txt{background:var(--G);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 a{color:inherit;text-decoration:none}
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:"Hanken Grotesk";font-weight:700;font-size:.93rem;padding:13px 24px;border-radius:999px;transition:.22s;cursor:pointer;border:none;white-space:nowrap;letter-spacing:.01em}
@@ -263,7 +264,7 @@ header:not(.stuck) .btn-gold{box-shadow:0 4px 22px rgba(0,0,0,.45)}
 .section{padding:88px 0}
 .sec-hd{margin-bottom:48px}
 .sec-hd h2{font-size:clamp(2.2rem,4vw,3.5rem);margin:12px 0 0}
-.sec-hd p{color:var(--muted);margin-top:14px;font-size:1.05rem;line-height:1.65;max-width:44em}
+.sec-hd p{color:var(--muted);margin-top:14px;font-size:1.05rem;line-height:1.7;max-width:65ch;text-wrap:pretty}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
 .card{
   background:linear-gradient(148deg,rgba(15,47,32,.42),rgba(3,15,10,.5));
@@ -310,7 +311,7 @@ header:not(.stuck) .btn-gold{box-shadow:0 4px 22px rgba(0,0,0,.45)}
 .contact-bg{background:linear-gradient(180deg,var(--bg1),var(--bg))}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
 h2.contact{font-size:clamp(2.4rem,4vw,4rem)}
-.contact .lead{color:var(--muted);margin:16px 0 24px;font-size:1.07rem;line-height:1.65}
+.contact .lead{color:var(--muted);margin:16px 0 24px;font-size:1.07rem;line-height:1.7;text-wrap:pretty}
 .cln{display:flex;align-items:center;gap:13px;padding:14px 0;border-top:1px solid var(--line)}
 .cln svg{width:19px;height:19px;stroke:var(--gold);fill:none;stroke-width:1.9;flex:none}
 .cln b{font-weight:700;display:block}
